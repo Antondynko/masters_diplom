@@ -266,6 +266,10 @@ while True:
     s_rho_ij, s_rho = Leader(Folower(s, d), c, V)
     print(s_rho)
 
+
+    for v in range(len(s_rho_ij)):
+        print(s_rho_ij[v])
+
     if s_rho > r_rho:
         solve = s
         continue
