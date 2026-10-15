@@ -235,50 +235,59 @@ def Improve(y):
     return y
 
 
-# _____________________________ Time _____________________________
-start = time.time()
+def solve(y_start, c, d, V, n, p, verbose=True):
+    """
+    Полный цикл поиска: Local_Search + Improve, пока есть улучшение.
+    :param y_start: стартовое размещение
+    :param c: матрица затрат
+    :param d: матрица предпочтений
+    :param V: порог
+    :param n: размер множества предприятий
+    :param p: количество открываемых предприятий
+    :param verbose: печатать ли промежуточные результаты
+    :return: (y_final, rho_final, elapsed)
+    """
+    def _log(*args):
+        if verbose:
+            print(*args)
 
-# _____________________________ Step 0 _____________________________
-y = Generate_y_start(n, p)
+    start = time.time()
 
-print(y)
-rho_ij, rho = Leader(Folower(y, d), c, V)
-print(rho_ij)
+    y = Generate_y_start(n, p) if y_start is None else list(y_start)
+    _log(y)
+    rho_ij, rho = Leader(Folower(y, d), c, V)
+    _log(rho_ij)
 
-solve = y
+    solve = y
 
-while True:
-    # p = N(y)
-    # print(p)
-    # print(Leader(Folower(p, d), c, V))
+    while True:
+        r = Local_Search(solve)
+        _log(r)
+        r_rho_ij, r_rho = Leader(Folower(r, d), c, V)
+        _log(r_rho)
 
-    # _____________________________ Step 1 _____________________________
+        s = Improve(r)
+        _log(s)
+        s_rho_ij, s_rho = Leader(Folower(s, d), c, V)
+        _log(s_rho)
 
-    r = Local_Search(solve)
-    print(r)
-    r_rho_ij, r_rho = Leader(Folower(r, d), c, V)
-    print(r_rho)
+        for v in range(len(s_rho_ij)):
+            _log(s_rho_ij[v])
 
-    # _____________________________ Step 2 _____________________________
+        if s_rho > r_rho:
+            solve = s
+            continue
+        else:
+            break
 
-    s = Improve(r)
-    print(s)
-    s_rho_ij, s_rho = Leader(Folower(s, d), c, V)
-    print(s_rho)
+    end = time.time()
+    elapsed = end - start
+    return solve, s_rho, elapsed
 
 
-    for v in range(len(s_rho_ij)):
-        print(s_rho_ij[v])
-
-    if s_rho > r_rho:
-        solve = s
-        continue
-    else:
-        break
-
-end = time.time()
-time = end - start
-print("Elapsed time:", time)
+if __name__ == "__main__":
+    _y, _rho, _elapsed = solve(None, c, d, V, n, p, verbose=True)
+    print("Elapsed time:", _elapsed)
 
 # _____________________________ Info _____________________________
 # Treaning data:
