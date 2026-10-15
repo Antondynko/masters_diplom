@@ -1,6 +1,7 @@
 import import_from_file
 import random
-import time
+
+from vnd.core import solve as _solve
 
 # _____________________________ DATA BASE _____________________________
 # _____________________________ Warning! _____________________________
@@ -236,53 +237,8 @@ def Improve(y):
 
 
 def solve(y_start, c, d, V, n, p, verbose=True):
-    """
-    Полный цикл поиска: Local_Search + Improve, пока есть улучшение.
-    :param y_start: стартовое размещение
-    :param c: матрица затрат
-    :param d: матрица предпочтений
-    :param V: порог
-    :param n: размер множества предприятий
-    :param p: количество открываемых предприятий
-    :param verbose: печатать ли промежуточные результаты
-    :return: (y_final, rho_final, elapsed)
-    """
-    def _log(*args):
-        if verbose:
-            print(*args)
-
-    start = time.time()
-
-    y = Generate_y_start(n, p) if y_start is None else list(y_start)
-    _log(y)
-    rho_ij, rho = Leader(Folower(y, d), c, V)
-    _log(rho_ij)
-
-    solve = y
-
-    while True:
-        r = Local_Search(solve)
-        _log(r)
-        r_rho_ij, r_rho = Leader(Folower(r, d), c, V)
-        _log(r_rho)
-
-        s = Improve(r)
-        _log(s)
-        s_rho_ij, s_rho = Leader(Folower(s, d), c, V)
-        _log(s_rho)
-
-        for v in range(len(s_rho_ij)):
-            _log(s_rho_ij[v])
-
-        if s_rho > r_rho:
-            solve = s
-            continue
-        else:
-            break
-
-    end = time.time()
-    elapsed = end - start
-    return solve, s_rho, elapsed
+    """Обёртка над vnd.core.solve для обратной совместимости."""
+    return _solve(y_start, c, d, V, n, p, mode="full", verbose=verbose)
 
 
 if __name__ == "__main__":
