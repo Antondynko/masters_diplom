@@ -11,7 +11,7 @@ __pycache__/
 .venv/
 venv/
 
-# тесты / артефакты
+# tests
 .pytest_cache/
 .coverage
 htmlcov/
