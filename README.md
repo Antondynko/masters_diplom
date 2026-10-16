@@ -44,7 +44,7 @@ python VND.py
 └── AGENTS.md            # руководство для контрибьюторов
 ```
 
-Текущий рабочий датасет — `20_20_15.txt`, путь прописан в `import_from_file.py`.
+Текущий рабочий датасет — `20_20_15.txt`, путь прописан в `artifacts/import_from_file.py`.
 `VND.py` и `VND_siplified.py` различаются реализацией функции `Leader`
 (см. ниже).
 
@@ -71,7 +71,7 @@ facility_index  client_index  cost  preference
 ```
 
 Датасеты лежат в `datasets/`. Переключение — через правку пути в
-`import_from_file.py` (пока CLI нет).
+`artifacts/import_from_file.py` (пока CLI нет).
 
 ## Переменные
 
@@ -79,15 +79,15 @@ facility_index  client_index  cost  preference
 |-----|-------|--------------|
 | `V`   | порог (бюджет) задачи верхнего уровня | вверху `VND.py` / `VND_siplified.py` |
 | `p`   | количество открываемых предприятий (медиана) | вверху `VND.py` |
-| `n`   | мощность множества предприятий I | `import_from_file.py` (жестко) |
-| `m`   | мощность множества клиентов J | `import_from_file.py` (жестко) |
-| `c`   | матрица производственно-транспортных затрат (n×m) | `import_from_file.py` |
-| `d`   | матрица предпочтений клиентов (n×m) | `import_from_file.py` |
+| `n`   | мощность множества предприятий I | `artifacts/import_from_file.py` (жестко) |
+| `m`   | мощность множества клиентов J | `artifacts/import_from_file.py` (жестко) |
+| `c`   | матрица производственно-транспортных затрат (n×m) | `artifacts/import_from_file.py` |
+| `d`   | матрица предпочтений клиентов (n×m) | `artifacts/import_from_file.py` |
 | `y`   | бинарный вектор размещения (n,) — решение верхнего уровня | результат `Generate_y_start` / `Local_Search` |
 | `x`   | матрица назначений клиентов (n×m) — решение нижнего уровня | результат `Folower` |
 | `rho` | матрица радиусов пороговой устойчивости (n×m) | результат `Leader` |
 
-Важно: `n` и `m` в `import_from_file.py` прописаны вручную (`n = 20`,
+Важно: `n` и `m` в `artifacts/import_from_file.py` прописаны вручную (`n = 20`,
 `m = 20`) и не читаются из файла. При смене датасета меняются оба числа
 и путь к `.txt`.
 
@@ -95,7 +95,7 @@ facility_index  client_index  cost  preference
 
 Пока CLI нет — вручную:
 
-1. В `import_from_file.py`: поменять путь к `.txt` и значения `n`, `m`.
+1. В `artifacts/import_from_file.py`: поменять путь к `.txt` и значения `n`, `m`.
 2. В `VND.py` (или `VND_siplified.py`): поменять `V` и `p` под датасет.
 3. Запустить: `python VND.py`.
 
@@ -201,7 +201,7 @@ Generate_y_start(n, p)
 ## Что дальше (roadmap)
 
 - CLI-вход `main.py` с `argparse` (`--dataset`, `--V`, `--p`, `--simplified`).
-- Вынос алгоритма в пакет `vnd/`, `import_from_file.py` → `vnd/data.py`.
+- Вынос алгоритма в пакет `vnd/`, `artifacts/import_from_file.py` → `vnd/data.py`.
 - Unit-тесты в `tests/` (зафиксированные пары `y`/`x` из закомментированного
   «Treening data» в `VND.py` — готовые fixtures).
 - Фиксирование зависимостей в `requirements.txt`.

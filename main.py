@@ -1,5 +1,6 @@
 import argparse
 
+from vnd.core import solve
 from vnd.data import load_dataset
 
 
@@ -27,13 +28,10 @@ def main() -> None:
     print(f"V={args.V}, p={args.p}, mode={'simplified' if args.simplified else 'full'}")
     print()
 
-    if args.simplified:
-        from VND_siplified import solve
-    else:
-        from VND import solve
-
     y_final, rho_final, elapsed = solve(
-        None, ds.c, ds.d, args.V, ds.n, args.p, verbose=True
+        None, ds.c, ds.d, args.V, ds.n, args.p,
+        mode="simplified" if args.simplified else "full",
+        verbose=True,
     )
     print(f"Elapsed time: {elapsed:.3f}s")
 
