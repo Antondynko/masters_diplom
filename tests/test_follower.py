@@ -1,6 +1,6 @@
 import unittest
 
-from vnd.follower import Folower
+from vnd.follower import follower
 
 
 class TestFollower(unittest.TestCase):
@@ -10,7 +10,7 @@ class TestFollower(unittest.TestCase):
              [4, 5, 6],
              [7, 8, 9]]
 
-        x = Folower(y, d)
+        x = follower(y, d)
 
         client_0 = x[0][0] + x[1][0] + x[2][0]
         client_1 = x[0][1] + x[1][1] + x[2][1]
@@ -25,7 +25,7 @@ class TestFollower(unittest.TestCase):
              [ 1,  1,  1],
              [ 5, 15, 25]]
 
-        x = Folower(y, d)
+        x = follower(y, d)
 
         self.assertEqual(x[2][0], 1)
         self.assertEqual(x[0][0], 0)
@@ -38,7 +38,7 @@ class TestFollower(unittest.TestCase):
              [ 1,  1],
              [ 5,  5]]
 
-        x = Folower(y, d)
+        x = follower(y, d)
 
         self.assertEqual(x[1][0], 1)
         self.assertEqual(x[1][1], 1)

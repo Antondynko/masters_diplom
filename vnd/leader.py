@@ -1,7 +1,7 @@
 CONST = 90000000
 
 
-def Leader(x, c, V):
+def leader(x, c, V):
     """
     Функция считающая радиус пороговой устойчивости по решению нижнего уровня (full).
     :param x: матрица назначений клиентов
@@ -33,7 +33,7 @@ def Leader(x, c, V):
     return rho, V - f
 
 
-def Leader_simplified(x, c, V):
+def leader_simplified(x, c, V):
     """
     Упрощённая модель Leader: весь остаток V-f ставится в позицию глобального min c
     среди назначенных клиентов.

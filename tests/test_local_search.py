@@ -1,6 +1,6 @@
 import unittest
 
-from vnd.local_search import N, Local_Search
+from vnd.local_search import n, local_search
 
 
 class TestN(unittest.TestCase):
@@ -11,7 +11,7 @@ class TestN(unittest.TestCase):
         c = [[10, 10],
              [10, 10]]
 
-        result = N(y, d, c, 1000)
+        result = n(y, d, c, 1000)
 
         self.assertEqual(result, y)
 
@@ -22,7 +22,7 @@ class TestN(unittest.TestCase):
         c = [[100, 100],
              [1, 1]]
 
-        result = N(y, d, c, 1000)
+        result = n(y, d, c, 1000)
 
         self.assertEqual(result, [0, 1])
 
@@ -37,7 +37,7 @@ class TestLocalSearch(unittest.TestCase):
              [1, 1, 1],
              [1, 1, 1]]
 
-        result = Local_Search(y, d, c, 1000, verbose=False)
+        result = local_search(y, d, c, 1000, verbose=False)
 
         self.assertEqual(sum(result), 1)
         self.assertIn(result, ([1, 0, 0], [0, 1, 0], [0, 0, 1]))

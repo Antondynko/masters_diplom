@@ -1,6 +1,6 @@
 import unittest
 
-from vnd.leader import Leader, Leader_simplified
+from vnd.leader import leader, leader_simplified
 
 
 class TestLeaderFull(unittest.TestCase):
@@ -10,7 +10,7 @@ class TestLeaderFull(unittest.TestCase):
         c = [[100, 200],
              [300, 400]]
 
-        _, val = Leader(x, c, 1000)
+        _, val = leader(x, c, 1000)
 
         self.assertEqual(val, 500)
 
@@ -20,7 +20,7 @@ class TestLeaderFull(unittest.TestCase):
         c = [[100, 200],
              [300, 400]]
 
-        rho, _ = Leader(x, c, 1000)
+        rho, _ = leader(x, c, 1000)
 
         expected_delta = 500 / 2
         self.assertAlmostEqual(rho[0][0], expected_delta)
@@ -34,7 +34,7 @@ class TestLeaderFull(unittest.TestCase):
         c = [[50, 200],
              [300, 400]]
 
-        rho, val = Leader(x, c, 1000)
+        rho, val = leader(x, c, 1000)
 
         self.assertEqual(val, 950)
         self.assertAlmostEqual(rho[0][0], 950)
@@ -48,7 +48,7 @@ class TestLeaderSimplified(unittest.TestCase):
         c = [[100, 200],
              [300, 400]]
 
-        _, val = Leader_simplified(x, c, 1000)
+        _, val = leader_simplified(x, c, 1000)
 
         self.assertEqual(val, 500)
 
@@ -58,7 +58,7 @@ class TestLeaderSimplified(unittest.TestCase):
         c = [[100, 200],
              [300, 400]]
 
-        rho, _ = Leader_simplified(x, c, 1000)
+        rho, _ = leader_simplified(x, c, 1000)
 
         self.assertEqual(rho[0][0], 500)
         self.assertEqual(rho[0][1], 0)
@@ -71,7 +71,7 @@ class TestLeaderSimplified(unittest.TestCase):
         c = [[100, 200],
              [300, 400]]
 
-        rho, val = Leader_simplified(x, c, 1000)
+        rho, val = leader_simplified(x, c, 1000)
 
         self.assertEqual(rho, [[0, 0], [0, 0]])
         self.assertEqual(val, 1000)

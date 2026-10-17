@@ -1,7 +1,7 @@
 import random
 
 
-def Generate_y_start(n, p):
+def generate_y_start(n, p):
     """
     :param n: мощность множества I
     :param p: количество открываемых предприятий (медиана)
@@ -13,7 +13,7 @@ def Generate_y_start(n, p):
     return y_start
 
 
-def Swap(y):
+def swap(y):
     """
     :param y: вектор размещения
     :return: окрестность 1-swap
@@ -31,7 +31,7 @@ def Swap(y):
     return swap
 
 
-def Pairs(array):
+def pairs(array):
     """
     :param array: массив
     :return: массив различных пар из элементов данного массива
@@ -44,7 +44,7 @@ def Pairs(array):
     return pairs
 
 
-def Swap_2(y):
+def swap_2(y):
     """
     :param y: размещение
     :return: окрестность 2-swap
@@ -52,8 +52,8 @@ def Swap_2(y):
     indx_1 = [i for i, v in enumerate(y) if v == 1]
     indx_0 = [i for i, v in enumerate(y) if v == 0]
 
-    p_1 = Pairs(indx_1)
-    p_0 = Pairs(indx_0)
+    p_1 = pairs(indx_1)
+    p_0 = pairs(indx_0)
 
     swap_2 = []
     for i in p_1:
