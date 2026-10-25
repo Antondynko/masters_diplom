@@ -98,6 +98,12 @@ generate_y_start(n, p)
 python -m unittest discover -s ./tests -v
 ```
 
+или
+
+```bash
+python3 -m unittest discover -s ./tests -v
+```
+
 ## Roadmap
 
 - Фиксация зависимостей в `requirements.txt`.
