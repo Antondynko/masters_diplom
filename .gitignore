@@ -15,3 +15,7 @@ venv/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# viz
+viz/cache/
+viz/output/

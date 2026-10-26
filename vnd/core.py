@@ -6,7 +6,7 @@ from vnd.local_search import local_search, improve
 from vnd.neighborhoods import generate_y_start
 
 
-def solve(y_start, c, d, V, n, p, mode="full", verbose=True):
+def solve(y_start, c, d, V, n, p, mode="full", verbose=True, tracer=None):
     """
     Полный цикл поиска: Local_Search + Improve, пока есть улучшение.
     :param y_start: стартовое размещение или None (генерировать)
@@ -17,6 +17,7 @@ def solve(y_start, c, d, V, n, p, mode="full", verbose=True):
     :param p: количество открываемых предприятий
     :param mode: "full" (VND.py логика) или "simplified" (VND_siplified.py логика)
     :param verbose: печатать ли промежуточные результаты
+    :param tracer: необязательный vnd.trace.Tracer для записи хода поиска - нужен для визуализации
     :return: (y_final, rho_final, elapsed)
     """
     leader_fn = leader if mode == "full" else leader_simplified
@@ -31,16 +32,18 @@ def solve(y_start, c, d, V, n, p, mode="full", verbose=True):
     _log(y)
     rho_ij, rho = leader_fn(follower(y, d), c, V)
     _log(rho_ij)
+    if tracer is not None:
+        tracer.start(y, rho)
 
     current = y
 
     while True:
-        r = local_search(current, d, c, V, leader_fn, verbose=verbose)
+        r = local_search(current, d, c, V, leader_fn, verbose=verbose, tracer=tracer)
         _log(r)
         r_rho_ij, r_rho = leader_fn(follower(r, d), c, V)
         _log(r_rho)
 
-        s = improve(r, d, c, V, leader_fn, verbose=verbose)
+        s = improve(r, d, c, V, leader_fn, verbose=verbose, tracer=tracer)
         _log(s)
         s_rho_ij, s_rho = leader_fn(follower(s, d), c, V)
         _log(s_rho)

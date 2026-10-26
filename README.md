@@ -25,7 +25,14 @@ python main.py
 │   ├── leader.py           # leader() и leader_simplified()
 │   ├── follower.py         # follower() — назначение клиентов
 │   ├── neighborhoods.py    # generate_y_start, swap, pairs, swap_2
-│   └── local_search.py     # n, local_search, improve
+│   ├── local_search.py     # n, local_search, improve
+│   └── trace.py            # Tracer — запись хода поиска для визуализации
+├── viz/                    # визуализация (отдельные зависимости)
+│   ├── landscape.py        # карта пространства решений + путь VND
+│   ├── requirements.txt
+│   ├── cache/              # кэш UMAP-проекций (в .gitignore)
+│   └── output/             # готовые картинки (в .gitignore)
+├── docs/                   # подробная документация (visualization.md)
 ├── tests/                  # unit-тесты (29 штук)
 ├── datasets/               # входные .txt-файлы
 ├── artifacts/              # оригинальные файлы (архив)
@@ -103,6 +110,16 @@ python -m unittest discover -s ./tests -v
 ```bash
 python3 -m unittest discover -s ./tests -v
 ```
+
+## Визуализация
+
+Карта пространства решений с путём VND поверх неё:
+
+```bash
+.venv/bin/python -m viz.landscape --p 5 --seed 2
+```
+
+Установка, параметры и как читать картинку — в [docs/visualization.md](docs/visualization.md).
 
 ## Roadmap
 
