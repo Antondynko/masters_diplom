@@ -12,6 +12,15 @@ python main.py
 
 По умолчанию: датасет `datasets/20_20_15.txt`, `V=47000`, `p=15`. На stdout — матрицы радиусов устойчивости и `Elapsed time`.
 
+Мультистарт - независимые запуски из разных случайных стартов параллельно по процессам:
+
+```bash
+python main.py --starts 32 --seed 1            # процессов = число ядер
+python main.py --starts 32 --workers 4 --seed 1
+```
+
+Выводит результат каждого старта и сводку: лучшее, худшее, среднее ± разброс. При одном `--seed` результат не зависит от `--workers`. Из кода: `vnd.parallel.solve_multistart(...)` возвращает `MultistartResult` (`best`, `runs`, `summary()`).
+
 Остановка: `Ctrl+C`. Для больших датасетов (80+80, 100+100) запуск может занять несколько минут.
 
 ## Структура проекта
@@ -26,6 +35,7 @@ python main.py
 │   ├── follower.py         # follower() — назначение клиентов
 │   ├── neighborhoods.py    # generate_y_start, swap, pairs, swap_2
 │   ├── local_search.py     # n, local_search, improve
+│   ├── parallel.py         # solve_multistart() — мультистарт по процессам
 │   └── trace.py            # Tracer — запись хода поиска для визуализации
 ├── viz/                    # визуализация (отдельные зависимости)
 │   ├── landscape.py        # карта пространства решений + путь VND
@@ -33,7 +43,7 @@ python main.py
 │   ├── cache/              # кэш UMAP-проекций (в .gitignore)
 │   └── output/             # готовые картинки (в .gitignore)
 ├── docs/                   # подробная документация (visualization.md)
-├── tests/                  # unit-тесты (29 штук)
+├── tests/                  # unit-тесты (38 штук)
 ├── datasets/               # входные .txt-файлы
 ├── artifacts/              # оригинальные файлы (архив)
 │   ├── VND.py
