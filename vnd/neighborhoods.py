@@ -1,14 +1,16 @@
 import random
 
 
-def generate_y_start(n, p):
+def generate_y_start(n, p, rng=None):
     """
     :param n: мощность множества I
     :param p: количество открываемых предприятий (медиана)
+    :param rng: необязательный random.Random - для воспроизводимых стартов (по умолчанию глобальный random)
     :return: стартовое размещение
     """
+    rng = random if rng is None else rng
     y_start = [0 for _ in range(n)]
-    for i in random.sample(range(n), p):
+    for i in rng.sample(range(n), p):
         y_start[i] = 1
     return y_start
 
