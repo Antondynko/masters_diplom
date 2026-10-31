@@ -42,8 +42,9 @@ python main.py --starts 32 --workers 4 --seed 1
 │   ├── requirements.txt
 │   ├── cache/              # кэш UMAP-проекций (в .gitignore)
 │   └── output/             # готовые картинки (в .gitignore)
-├── docs/                   # подробная документация (visualization.md)
-├── tests/                  # unit-тесты (38 штук)
+├── docs/                   # подробная документация (visualization.md, testing.md)
+├── tests/                  # unit тесты
+│   ├── e2e                 # end-to-end тесты
 ├── datasets/               # входные .txt-файлы
 ├── artifacts/              # оригинальные файлы (архив)
 │   ├── VND.py
@@ -120,6 +121,8 @@ python -m unittest discover -s ./tests -v
 ```bash
 python3 -m unittest discover -s ./tests -v
 ```
+
+Какие есть e2e-тесты (метаморфные и эталонные) — в [docs/testing.md](docs/testing.md).
 
 ## Визуализация
 

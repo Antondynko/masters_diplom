@@ -59,4 +59,4 @@ def solve(y_start, c, d, V, n, p, mode="full", verbose=True, tracer=None):
 
     end = time.time()
     elapsed = end - start
-    return current, s_rho, elapsed
+    return r, r_rho, elapsed

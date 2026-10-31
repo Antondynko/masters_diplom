@@ -44,9 +44,9 @@ class TestSolveMultistart(unittest.TestCase):
 
     def test_parallel_runs_match_serial_values(self):
         expected_workers = 2
-        expected_y_0 = [1, 0, 0, 1]
-        expected_y_1 = [1, 1, 0, 0]
-        expected_y_2 = [0, 1, 1, 0]
+        expected_y_0 = [0, 1, 0, 1]
+        expected_y_1 = [0, 1, 0, 1]
+        expected_y_2 = [1, 0, 1, 0]
         expected_objective = 940
 
         result = solve_multistart(_c(), _d(), 1000, 4, 2, starts=3, workers=2, seed=2)
